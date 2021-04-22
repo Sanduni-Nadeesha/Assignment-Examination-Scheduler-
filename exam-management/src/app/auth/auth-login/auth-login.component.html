@@ -1,0 +1,37 @@
+<div class="container content-wrapper">
+    <section>
+        <form [formGroup]="loginForm">
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input matInput type="email" placeholder="Enter email id" formControlName="email" (keypress)="isDirty()" autocomplete="false">
+                    <mat-error *ngIf="loginForm.get('email').hasError('required') && isSubmitted">
+                        Email is required
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('email').hasError('minlength') && isSubmitted">
+                        Email must be minimum 6 length
+                    </mat-error>
+                    <mat-error *ngIf="!loginForm.get('email').hasError('minlength') && loginForm.get('email').hasError('pattern') && isSubmitted">
+                        Email must be valid
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password</mat-label>
+                    <input matInput type="password" placeholder="Enter your password" formControlName="password" (keypress)="isDirty()" autocomplete="new-password">
+                    <mat-error *ngIf="loginForm.get('password').hasError('required') && isSubmitted">
+                        Password is required
+                    </mat-error>
+                    <mat-error *ngIf="loginForm.get('password').hasError('minlength') && isSubmitted">
+                        Password must be minimum 6 length
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-raised-button type="button" (click)="reset()" *ngIf="dirty">Reset</button>
+                <button mat-raised-button color="primary" type="button" (click)="submit()">Submit</button>
+            </div>
+        </form>
+    </section>
+</div>
